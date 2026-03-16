@@ -429,53 +429,68 @@ document.getElementById('badge').textContent = scripts.length + ' scripts';
 
 var timer;
 
+var filtered = [];
+
 function render(filter) {
   filter = filter || '';
   var list = document.getElementById('scriptList');
-  var hits = scripts.filter(function(s){ return s[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1; });
+  filtered = scripts.filter(function(s){ return s[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1; });
 
-  if (!hits.length) {
+  if (!filtered.length) {
     list.innerHTML = '<div class="no-results">no scripts found</div>';
   } else {
-    list.innerHTML = hits.map(function(s, i){
-      return '<div class="script-row" style="-webkit-animation-delay:' + Math.min(i*10,160) + 'ms;animation-delay:' + Math.min(i*10,160) + 'ms">' +
+    list.innerHTML = filtered.map(function(s, i){
+      var delay = Math.min(i*10,160);
+      return '<div class="script-row" style="-webkit-animation-delay:' + delay + 'ms;animation-delay:' + delay + 'ms">' +
         '<span class="row-num">' + (i+1 < 10 ? '0' + (i+1) : i+1) + '</span>' +
         '<span class="row-name">' + s[0] + '</span>' +
-        '<button class="copy-btn" onclick="doCopy(this,' + JSON.stringify(s[1]) + ')">copy</button>' +
+        '<button class="copy-btn" data-idx="' + i + '">copy</button>' +
       '</div>';
     }).join('');
   }
 
   document.getElementById('count').textContent =
-    filter ? hits.length + ' / ' + scripts.length : scripts.length + ' total';
+    filter ? filtered.length + ' / ' + scripts.length : scripts.length + ' total';
 }
 
 function fallbackCopy(text) {
-  var ta = document.createElement("textarea");
+  var ta = document.createElement('textarea');
   ta.value = text;
-  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+  ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';
   document.body.appendChild(ta);
-  ta.focus(); ta.select();
-  try { document.execCommand("copy"); } catch(e) {}
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
   document.body.removeChild(ta);
 }
 
-function doCopy(btn, code) {
+function doCopy(btn, text) {
   function onSuccess() {
-    btn.textContent = "done";
-    btn.classList.add("copied");
-    setTimeout(function(){ btn.textContent = "copy"; btn.classList.remove("copied"); }, 1400);
-    var st = document.getElementById("status");
-    st.classList.add("on");
+    btn.textContent = 'done';
+    btn.classList.add('copied');
+    setTimeout(function(){ btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1400);
+    var st = document.getElementById('status');
+    st.classList.add('on');
     clearTimeout(timer);
-    timer = setTimeout(function(){ st.classList.remove("on"); }, 1800);
+    timer = setTimeout(function(){ st.classList.remove('on'); }, 1800);
   }
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(code).then(onSuccess).catch(function(){ fallbackCopy(code); onSuccess(); });
+    navigator.clipboard.writeText(text).then(onSuccess).catch(function(){ fallbackCopy(text); onSuccess(); });
   } else {
-    fallbackCopy(code); onSuccess();
+    fallbackCopy(text);
+    onSuccess();
   }
 }
+
+document.getElementById('scriptList').addEventListener('click', function(e) {
+  var btn = e.target;
+  if (btn.classList.contains('copy-btn')) {
+    var idx = parseInt(btn.getAttribute('data-idx'), 10);
+    if (!isNaN(idx) && filtered[idx]) {
+      doCopy(btn, filtered[idx][1]);
+    }
+  }
+});
 
 function filterScripts() { render(document.getElementById('search').value); }
 
