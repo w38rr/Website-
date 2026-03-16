@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roblox Script Hub</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0f172a;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background: #1e293b;
+        padding: 30px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 600px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 200px;
+        background: #0f172a;
+        color: #38bdf8;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        resize: none;
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 15px;
+        background: #38bdf8;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #0ea5e9;
+    }
+
+    .status {
+        text-align: center;
+        margin-top: 10px;
+        color: #22c55e;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Roblox Script Hub 🚀</h1>
+
+    <textarea id="scriptBox" readonly>
+loadstring(game:HttpGet("https://your-script-link-here"))()
+    </textarea>
+
+    <button onclick="copyScript()">Copy Script</button>
+
+    <div class="status" id="status"></div>
+</div>
+
+<script>
+function copyScript() {
+    const script = document.getElementById("scriptBox");
+    script.select();
+    script.setSelectionRange(0, 99999);
+
+    navigator.clipboard.writeText(script.value).then(() => {
+        document.getElementById("status").innerText = "✅ Script copied to clipboard!";
+    }).catch(() => {
+        document.getElementById("status").innerText = "❌ Failed to copy.";
+    });
+}
+</script>
+
+</body>
+</html>
