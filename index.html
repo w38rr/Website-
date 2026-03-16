@@ -10,12 +10,12 @@
 <style>
 html, body, * { -webkit-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; }
 
-html { background: #060a14; }
+html { background: #000; }
 
 body {
 font-family: ‘Inter’, system-ui, sans-serif;
-background: #060a14 !important;
-color: #b8cce0;
+background: #000 !important;
+color: #aab8cc;
 min-height: 100vh;
 min-height: -webkit-fill-available;
 display: -webkit-flex;
@@ -30,8 +30,8 @@ content: ‘’;
 position: fixed;
 top: 0; left: 0; right: 0; bottom: 0;
 background-image:
-linear-gradient(rgba(0,200,255,.025) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,200,255,.025) 1px, transparent 1px);
+linear-gradient(rgba(200,30,30,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(200,30,30,.03) 1px, transparent 1px);
 background-size: 32px 32px;
 pointer-events: none;
 z-index: 0;
@@ -44,7 +44,7 @@ top: -30%; left: 50%;
 -webkit-transform: translateX(-50%);
 transform: translateX(-50%);
 width: 500px; height: 300px;
-background: radial-gradient(ellipse, rgba(0,140,255,.06) 0%, transparent 70%);
+background: radial-gradient(ellipse, rgba(180,20,20,.06) 0%, transparent 70%);
 pointer-events: none;
 z-index: 0;
 }
@@ -67,42 +67,45 @@ from { opacity: 0; transform: translateY(16px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── CHROME ── */
 .chrome {
-background: #0a1628;
-border: 1px solid #1c3054;
+background: #0d0d0d;
+border: 1px solid #1e1e1e;
 border-radius: 10px;
 overflow: hidden;
--webkit-box-shadow: 0 0 0 1px rgba(0,200,255,.04), 0 20px 60px rgba(0,0,0,.6), 0 0 80px rgba(0,100,255,.05);
-box-shadow: 0 0 0 1px rgba(0,200,255,.04), 0 20px 60px rgba(0,0,0,.6), 0 0 80px rgba(0,100,255,.05);
+-webkit-box-shadow: 0 0 0 1px rgba(180,20,20,.06), 0 24px 60px rgba(0,0,0,.8);
+box-shadow: 0 0 0 1px rgba(180,20,20,.06), 0 24px 60px rgba(0,0,0,.8);
 }
 
+/* ── TITLEBAR ── */
 .titlebar {
 display: -webkit-flex;
 display: flex;
 -webkit-align-items: center;
 align-items: center;
 padding: 8px 12px;
-background: rgba(255,255,255,.02);
-border-bottom: 1px solid #1c3054;
+background: #080808;
+border-bottom: 1px solid #1a1a1a;
 gap: 5px;
 }
 
 .dot { width: 9px; height: 9px; border-radius: 50%; }
-.dot-r { background: #ff5f57; }
-.dot-y { background: #febc2e; }
-.dot-g { background: #28c840; }
+.dot-r { background: #c0392b; }
+.dot-y { background: #888; }
+.dot-g { background: #444; }
 
 .title-text {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 10px;
-color: #2d4a70;
+color: #333;
 margin: 0 auto;
 letter-spacing: .06em;
 }
 
+/* ── HEADER ── */
 .header {
 padding: 10px 12px;
-border-bottom: 1px solid #1c3054;
+border-bottom: 1px solid #1a1a1a;
 display: -webkit-flex;
 display: flex;
 -webkit-align-items: center;
@@ -120,26 +123,22 @@ align-items: center;
 gap: 8px;
 }
 
-.logo-icon {
-width: 28px; height: 28px;
-background: rgba(0,200,255,.08);
-border: 1px solid rgba(0,200,255,.18);
-border-radius: 6px;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
--webkit-justify-content: center;
-justify-content: center;
-font-size: 13px;
+/* small red bar accent instead of emoji */
+.logo-bar {
+width: 3px;
+height: 28px;
+background: #c0392b;
+border-radius: 2px;
 -webkit-flex-shrink: 0;
 flex-shrink: 0;
+-webkit-box-shadow: 0 0 8px rgba(192,57,43,.5);
+box-shadow: 0 0 8px rgba(192,57,43,.5);
 }
 
 .header-text h1 {
 font-size: 13px;
 font-weight: 600;
-color: #e2eeff;
+color: #e8e8e8;
 letter-spacing: .01em;
 line-height: 1;
 }
@@ -147,7 +146,7 @@ line-height: 1;
 .header-text p {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #2d4a70;
+color: #333;
 margin-top: 2px;
 letter-spacing: .04em;
 }
@@ -155,9 +154,9 @@ letter-spacing: .04em;
 .badge {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-background: rgba(0,200,255,.08);
-border: 1px solid rgba(0,200,255,.18);
-color: #00c8ff;
+background: rgba(192,57,43,.1);
+border: 1px solid rgba(192,57,43,.25);
+color: #c0392b;
 padding: 3px 7px;
 border-radius: 4px;
 letter-spacing: .04em;
@@ -166,9 +165,10 @@ flex-shrink: 0;
 white-space: nowrap;
 }
 
+/* ── SEARCH ── */
 .search-wrap {
 padding: 7px 10px;
-border-bottom: 1px solid #1c3054;
+border-bottom: 1px solid #1a1a1a;
 position: relative;
 }
 
@@ -178,7 +178,7 @@ left: 20px;
 top: 50%;
 -webkit-transform: translateY(-50%);
 transform: translateY(-50%);
-color: #2d4a70;
+color: #333;
 font-size: 13px;
 pointer-events: none;
 line-height: 1;
@@ -187,10 +187,10 @@ line-height: 1;
 input[type=“text”] {
 width: 100%;
 padding: 6px 10px 6px 28px;
-background: rgba(255,255,255,.03);
-border: 1px solid #1c3054;
+background: #111;
+border: 1px solid #1e1e1e;
 border-radius: 6px;
-color: #b8cce0;
+color: #aab8cc;
 font-family: ‘Inter’, sans-serif;
 font-size: 12px;
 outline: none;
@@ -199,25 +199,26 @@ transition: border-color .15s, box-shadow .15s;
 -webkit-appearance: none;
 }
 
-input[type=“text”]::placeholder { color: #2d4a70; }
+input[type=“text”]::placeholder { color: #333; }
 input[type=“text”]:focus {
-border-color: rgba(0,200,255,.4);
--webkit-box-shadow: 0 0 0 3px rgba(0,200,255,.06);
-box-shadow: 0 0 0 3px rgba(0,200,255,.06);
+border-color: rgba(192,57,43,.5);
+-webkit-box-shadow: 0 0 0 3px rgba(192,57,43,.07);
+box-shadow: 0 0 0 3px rgba(192,57,43,.07);
 }
 
+/* ── LIST ── */
 .script-list {
 max-height: 420px;
 overflow-y: auto;
 padding: 3px 6px;
 -webkit-overflow-scrolling: touch;
 scrollbar-width: thin;
-scrollbar-color: #1c3054 transparent;
+scrollbar-color: #1e1e1e transparent;
 }
 
 .script-list::-webkit-scrollbar { width: 3px; }
 .script-list::-webkit-scrollbar-track { background: transparent; }
-.script-list::-webkit-scrollbar-thumb { background: #1c3054; border-radius: 2px; }
+.script-list::-webkit-scrollbar-thumb { background: #222; border-radius: 2px; }
 
 .script-row {
 display: -webkit-flex;
@@ -248,7 +249,7 @@ to   { opacity: 1; }
 .row-num {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #1e3a5f;
+color: #2a2a2a;
 width: 20px;
 -webkit-flex-shrink: 0;
 flex-shrink: 0;
@@ -257,7 +258,7 @@ flex-shrink: 0;
 .row-name {
 font-size: 12px;
 font-weight: 500;
-color: #c8daf0;
+color: #c8c8c8;
 -webkit-flex: 1;
 flex: 1;
 white-space: nowrap;
@@ -267,9 +268,9 @@ text-overflow: ellipsis;
 
 .copy-btn {
 opacity: 0;
-border: 1px solid #1c3054;
+border: 1px solid #222;
 background: transparent;
-color: #4a7090;
+color: #444;
 padding: 2px 8px;
 border-radius: 4px;
 font-family: ‘Share Tech Mono’, monospace;
@@ -287,36 +288,37 @@ line-height: 1.6;
 }
 
 .copy-btn:hover, .copy-btn:active {
-border-color: #00c8ff;
-color: #00c8ff;
-background: rgba(0,200,255,.08);
+border-color: #c0392b;
+color: #c0392b;
+background: rgba(192,57,43,.08);
 }
 
 .copy-btn.copied {
-border-color: #00e87a;
-color: #00e87a;
-background: rgba(0,232,122,.07);
+border-color: #27ae60;
+color: #27ae60;
+background: rgba(39,174,96,.07);
 opacity: 1 !important;
 }
 
 @media (hover: none) { .copy-btn { opacity: 1; } }
 
+/* ── FOOTER ── */
 .footer {
 padding: 6px 12px;
-border-top: 1px solid #1c3054;
+border-top: 1px solid #1a1a1a;
 display: -webkit-flex;
 display: flex;
 -webkit-align-items: center;
 align-items: center;
 -webkit-justify-content: space-between;
 justify-content: space-between;
-background: rgba(255,255,255,.01);
+background: #080808;
 }
 
 .status {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #00e87a;
+color: #27ae60;
 letter-spacing: .05em;
 opacity: 0;
 -webkit-transition: opacity .25s;
@@ -327,7 +329,7 @@ transition: opacity .25s;
 .count {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #2d4a70;
+color: #333;
 letter-spacing: .04em;
 }
 
@@ -336,7 +338,7 @@ text-align: center;
 padding: 20px 0;
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 11px;
-color: #2d4a70;
+color: #333;
 }
 </style>
 
@@ -352,28 +354,28 @@ color: #2d4a70;
     </div>
     <div class="header">
       <div class="header-left">
-        <div class="logo-icon">⚡</div>
+        <div class="logo-bar"></div>
         <div class="header-text">
           <h1>Playground Scripts</h1>
           <p>// roblox exploit library</p>
         </div>
       </div>
-      <div class="badge" id="badge">── ──</div>
+      <div class="badge" id="badge">-- --</div>
     </div>
     <div class="search-wrap">
-      <span class="search-icon">⌕</span>
+      <span class="search-icon">&#8981;</span>
       <input type="text" id="search" placeholder="Search scripts..." oninput="filterScripts()">
     </div>
     <div class="script-list" id="scriptList"></div>
     <div class="footer">
-      <div class="status" id="status">✓ copied</div>
+      <div class="status" id="status">&#10003; copied</div>
       <div class="count" id="count"></div>
     </div>
   </div>
 </div>
 
 <script>
-const scripts = [
+var scripts = [
 ["All Characters",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
 ["Arcade Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
 ["Blood Debt",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Blood%20debt"))()'],
@@ -425,45 +427,54 @@ const scripts = [
 
 document.getElementById('badge').textContent = scripts.length + ' scripts';
 
-let timer;
+var timer;
 
 function render(filter) {
   filter = filter || '';
-  const list = document.getElementById('scriptList');
-  const hits = scripts.filter(s => s[0].toLowerCase().includes(filter.toLowerCase()));
+  var list = document.getElementById('scriptList');
+  var hits = scripts.filter(function(s){ return s[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1; });
 
   if (!hits.length) {
     list.innerHTML = '<div class="no-results">no scripts found</div>';
   } else {
-    list.innerHTML = hits.map((s, i) =>
-      '<div class="script-row" style="-webkit-animation-delay:' + Math.min(i*10,160) + 'ms;animation-delay:' + Math.min(i*10,160) + 'ms">' +
-        '<span class="row-num">' + String(i+1).padStart(2,'0') + '</span>' +
+    list.innerHTML = hits.map(function(s, i){
+      return '<div class="script-row" style="-webkit-animation-delay:' + Math.min(i*10,160) + 'ms;animation-delay:' + Math.min(i*10,160) + 'ms">' +
+        '<span class="row-num">' + (i+1 < 10 ? '0' + (i+1) : i+1) + '</span>' +
         '<span class="row-name">' + s[0] + '</span>' +
         '<button class="copy-btn" onclick="doCopy(this,' + JSON.stringify(s[1]) + ')">copy</button>' +
-      '</div>'
-    ).join('');
+      '</div>';
+    }).join('');
   }
 
   document.getElementById('count').textContent =
     filter ? hits.length + ' / ' + scripts.length : scripts.length + ' total';
 }
 
+function fallbackCopy(text) {
+  var ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+  document.body.appendChild(ta);
+  ta.focus(); ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
 function doCopy(btn, code) {
-  try {
-    navigator.clipboard.writeText(code);
-  } catch(e) {
-    var ta = document.createElement('textarea');
-    ta.value = code; document.body.appendChild(ta);
-    ta.select(); document.execCommand('copy');
-    document.body.removeChild(ta);
+  function onSuccess() {
+    btn.textContent = "done";
+    btn.classList.add("copied");
+    setTimeout(function(){ btn.textContent = "copy"; btn.classList.remove("copied"); }, 1400);
+    var st = document.getElementById("status");
+    st.classList.add("on");
+    clearTimeout(timer);
+    timer = setTimeout(function(){ st.classList.remove("on"); }, 1800);
   }
-  btn.textContent = 'done';
-  btn.classList.add('copied');
-  setTimeout(function(){ btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1400);
-  var st = document.getElementById('status');
-  st.classList.add('on');
-  clearTimeout(timer);
-  timer = setTimeout(function(){ st.classList.remove('on'); }, 1800);
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(code).then(onSuccess).catch(function(){ fallbackCopy(code); onSuccess(); });
+  } else {
+    fallbackCopy(code); onSuccess();
+  }
 }
 
 function filterScripts() { render(document.getElementById('search').value); }
