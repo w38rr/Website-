@@ -5,65 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roblox Script Hub</title>
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #0f172a, #1e293b);
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
 
-    .container {
-        background: rgba(30, 41, 59, 0.95);
-        padding: 25px;
-        border-radius: 18px;
-        width: 340px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-        text-align: center;
-    }
+.container {
+    width: 380px;
+    background: rgba(30,41,59,0.95);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
 
-    h1 {
-        font-size: 22px;
-        margin-bottom: 20px;
-    }
+h1 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
 
-    .script-card {
-        background: #0f172a;
-        border-radius: 12px;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: #0f172a;
+    color: white;
+    font-size: 14px;
+}
 
-    .script-title {
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
+.script-list {
+    max-height: 500px;
+    overflow-y: auto;
+}
 
-    button {
-        width: 100%;
-        padding: 12px;
-        background: #38bdf8;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
+.script-card {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
 
-    button:hover {
-        background: #0ea5e9;
-        transform: scale(1.03);
-    }
+.script-title {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
 
-    .status {
-        margin-top: 15px;
-        font-size: 14px;
-        color: #22c55e;
-    }
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #38bdf8;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+
+.status {
+    text-align: center;
+    margin-top: 12px;
+    color: #22c55e;
+}
 </style>
 </head>
 <body>
@@ -71,39 +84,63 @@
 <div class="container">
     <h1>Roblox Script Hub 🚀</h1>
 
-    <div class="script-card">
-        <div class="script-title">All Characters Script</div>
-        <button onclick="copyScript(1)">Copy Script</button>
-    </div>
+    <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()">
 
-    <div class="script-card">
-        <div class="script-title">Arcade Basketball Script</div>
-        <button onclick="copyScript(2)">Copy Script</button>
-    </div>
+    <div class="script-list" id="scriptList"></div>
 
     <div class="status" id="status"></div>
 </div>
 
 <script>
-function copyScript(id) {
-    let script = "";
+const scripts = [
+["All Characters",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
+["Arcade Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
+["Blood Debt",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Blood%20debt"))()'],
+["Brookhaven",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Brookhaven"))()'],
+["Bug Test",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bug%20test"))()'],
+["Bypass Marvellous",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bypass-marvellous"))()'],
+["Carry People 3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Carry%20people%203"))()'],
+["Characters v1",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v1"))()'],
+["Characters v2",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v2"))()'],
+["Characters v3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v3"))()'],
+["Chicago Trenches",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chicago-Trenches"))()'],
+["Chose ur power",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chose%20ur%20power"))()'],
+["Draw a raft",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Draw-a-raft"))()'],
+["FPV DRONE",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/FPV%20DRONE"))()'],
+["Fall and break bones",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fall%20and%20break%20bones"))()'],
+["Fame",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fame"))()'],
+["Field Goal simulator",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Field%20Goal%20simulator"))()'],
+["Fireball Training",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fireball-Training"))()'],
+["Flag football",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Flag%20football"))()'],
+["Football duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Football%20duals"))()'],
+["Violent",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
+];
 
-    if (id === 1) {
-        script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()';
-    }
+function renderScripts(filter="") {
+    const list = document.getElementById("scriptList");
+    list.innerHTML = "";
 
-    if (id === 2) {
-        script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()';
-    }
-
-    navigator.clipboard.writeText(script)
-        .then(() => {
-            document.getElementById("status").innerText = "✅ Script copied!";
-        })
-        .catch(() => {
-            document.getElementById("status").innerText = "❌ Copy failed";
-        });
+    scripts.filter(s => s[0].toLowerCase().includes(filter.toLowerCase()))
+    .forEach(script => {
+        list.innerHTML += `
+        <div class="script-card">
+            <div class="script-title">${script[0]}</div>
+            <button onclick='copyScript(${JSON.stringify(script[1])})'>Copy Script</button>
+        </div>`;
+    });
 }
+
+function copyScript(script) {
+    navigator.clipboard.writeText(script).then(()=>{
+        document.getElementById("status").innerText="✅ Script copied!";
+    });
+}
+
+function filterScripts() {
+    renderScripts(document.getElementById("search").value);
+}
+
+renderScripts();
 </script>
 
 </body>
