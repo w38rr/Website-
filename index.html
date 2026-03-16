@@ -22,7 +22,7 @@ display: -webkit-flex;
 display: flex;
 -webkit-justify-content: center;
 justify-content: center;
-padding: 20px 12px 32px;
+padding: 20px 12px 40px;
 }
 
 body::before {
@@ -91,13 +91,13 @@ gap: 5px;
 
 .dot { width: 9px; height: 9px; border-radius: 50%; }
 .dot-r { background: #c0392b; }
-.dot-y { background: #888; }
-.dot-g { background: #444; }
+.dot-y { background: #555; }
+.dot-g { background: #333; }
 
 .title-text {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 10px;
-color: #333;
+color: #2a2a2a;
 margin: 0 auto;
 letter-spacing: .06em;
 }
@@ -123,7 +123,7 @@ align-items: center;
 gap: 8px;
 }
 
-/* small red bar accent instead of emoji */
+/* animated red glow bar */
 .logo-bar {
 width: 3px;
 height: 28px;
@@ -131,8 +131,19 @@ background: #c0392b;
 border-radius: 2px;
 -webkit-flex-shrink: 0;
 flex-shrink: 0;
--webkit-box-shadow: 0 0 8px rgba(192,57,43,.5);
-box-shadow: 0 0 8px rgba(192,57,43,.5);
+-webkit-animation: glowPulse 2s ease-in-out infinite;
+animation: glowPulse 2s ease-in-out infinite;
+}
+
+@-webkit-keyframes glowPulse {
+0%   { -webkit-box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); }
+50%  { -webkit-box-shadow: 0 0 8px 3px rgba(192,57,43,.8), 0 0 20px 6px rgba(192,57,43,.3); box-shadow: 0 0 8px 3px rgba(192,57,43,.8), 0 0 20px 6px rgba(192,57,43,.3); }
+100% { -webkit-box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); }
+}
+@keyframes glowPulse {
+0%   { box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); }
+50%  { box-shadow: 0 0 8px 3px rgba(192,57,43,.8), 0 0 20px 6px rgba(192,57,43,.3); }
+100% { box-shadow: 0 0 4px 1px rgba(192,57,43,.4), 0 0 10px 2px rgba(192,57,43,.15); }
 }
 
 .header-text h1 {
@@ -146,7 +157,7 @@ line-height: 1;
 .header-text p {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #333;
+color: #2d2d2d;
 margin-top: 2px;
 letter-spacing: .04em;
 }
@@ -178,7 +189,7 @@ left: 20px;
 top: 50%;
 -webkit-transform: translateY(-50%);
 transform: translateY(-50%);
-color: #333;
+color: #2d2d2d;
 font-size: 13px;
 pointer-events: none;
 line-height: 1;
@@ -199,16 +210,60 @@ transition: border-color .15s, box-shadow .15s;
 -webkit-appearance: none;
 }
 
-input[type=“text”]::placeholder { color: #333; }
+input[type=“text”]::placeholder { color: #2d2d2d; }
 input[type=“text”]:focus {
 border-color: rgba(192,57,43,.5);
 -webkit-box-shadow: 0 0 0 3px rgba(192,57,43,.07);
 box-shadow: 0 0 0 3px rgba(192,57,43,.07);
 }
 
+/* ── CATEGORY TABS ── */
+.tabs-wrap {
+padding: 6px 10px;
+border-bottom: 1px solid #1a1a1a;
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+scrollbar-width: none;
+white-space: nowrap;
+}
+.tabs-wrap::-webkit-scrollbar { display: none; }
+
+.tab {
+display: inline-block;
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 9px;
+letter-spacing: .05em;
+text-transform: uppercase;
+padding: 3px 9px;
+border-radius: 4px;
+border: 1px solid #1e1e1e;
+color: #333;
+background: transparent;
+cursor: pointer;
+margin-right: 4px;
+-webkit-transition: all .15s;
+transition: all .15s;
+-webkit-appearance: none;
+appearance: none;
+white-space: nowrap;
+}
+
+.tab:last-child { margin-right: 0; }
+
+.tab:hover {
+border-color: #333;
+color: #666;
+}
+
+.tab.active {
+background: rgba(192,57,43,.12);
+border-color: rgba(192,57,43,.35);
+color: #c0392b;
+}
+
 /* ── LIST ── */
 .script-list {
-max-height: 420px;
+max-height: 380px;
 overflow-y: auto;
 padding: 3px 6px;
 -webkit-overflow-scrolling: touch;
@@ -230,8 +285,8 @@ height: 32px;
 border-radius: 5px;
 -webkit-transition: background .1s;
 transition: background .1s;
--webkit-animation: rowIn .2s ease both;
-animation: rowIn .2s ease both;
+-webkit-animation: rowIn .18s ease both;
+animation: rowIn .18s ease both;
 }
 
 .script-row:hover { background: rgba(255,255,255,.04); }
@@ -249,7 +304,7 @@ to   { opacity: 1; }
 .row-num {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #2a2a2a;
+color: #222;
 width: 20px;
 -webkit-flex-shrink: 0;
 flex-shrink: 0;
@@ -266,11 +321,25 @@ overflow: hidden;
 text-overflow: ellipsis;
 }
 
+.row-tag {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 8px;
+color: #2a2a2a;
+background: #111;
+border: 1px solid #1a1a1a;
+border-radius: 3px;
+padding: 1px 5px;
+margin-right: 6px;
+-webkit-flex-shrink: 0;
+flex-shrink: 0;
+letter-spacing: .03em;
+}
+
 .copy-btn {
 opacity: 0;
-border: 1px solid #222;
+border: 1px solid #1e1e1e;
 background: transparent;
-color: #444;
+color: #3a3a3a;
 padding: 2px 8px;
 border-radius: 4px;
 font-family: ‘Share Tech Mono’, monospace;
@@ -315,21 +384,10 @@ justify-content: space-between;
 background: #080808;
 }
 
-.status {
-font-family: ‘Share Tech Mono’, monospace;
-font-size: 9px;
-color: #27ae60;
-letter-spacing: .05em;
-opacity: 0;
--webkit-transition: opacity .25s;
-transition: opacity .25s;
-}
-.status.on { opacity: 1; }
-
 .count {
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 9px;
-color: #333;
+color: #2a2a2a;
 letter-spacing: .04em;
 }
 
@@ -338,12 +396,70 @@ text-align: center;
 padding: 20px 0;
 font-family: ‘Share Tech Mono’, monospace;
 font-size: 11px;
-color: #333;
+color: #2a2a2a;
+}
+
+/* ── TOAST ── */
+.toast {
+position: fixed;
+bottom: 28px;
+left: 50%;
+-webkit-transform: translateX(-50%) translateY(20px);
+transform: translateX(-50%) translateY(20px);
+background: #111;
+border: 1px solid #1e1e1e;
+border-radius: 8px;
+padding: 8px 14px;
+display: -webkit-flex;
+display: flex;
+-webkit-align-items: center;
+align-items: center;
+gap: 7px;
+z-index: 999;
+opacity: 0;
+-webkit-transition: opacity .2s, -webkit-transform .2s;
+transition: opacity .2s, transform .2s;
+pointer-events: none;
+white-space: nowrap;
+-webkit-box-shadow: 0 8px 24px rgba(0,0,0,.6);
+box-shadow: 0 8px 24px rgba(0,0,0,.6);
+}
+
+.toast.show {
+opacity: 1;
+-webkit-transform: translateX(-50%) translateY(0);
+transform: translateX(-50%) translateY(0);
+}
+
+.toast-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+background: #27ae60;
+-webkit-flex-shrink: 0;
+flex-shrink: 0;
+}
+
+.toast-text {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 10px;
+color: #888;
+letter-spacing: .05em;
+}
+
+.toast-name {
+font-family: ‘Share Tech Mono’, monospace;
+font-size: 10px;
+color: #ccc;
+letter-spacing: .04em;
+max-width: 160px;
+overflow: hidden;
+text-overflow: ellipsis;
 }
 </style>
 
 </head>
 <body>
+
 <div class="container">
   <div class="chrome">
     <div class="titlebar">
@@ -352,107 +468,154 @@ color: #333;
       <div class="dot dot-g"></div>
       <span class="title-text">playground_scripts.exe</span>
     </div>
-    <div class="header">
-      <div class="header-left">
-        <div class="logo-bar"></div>
-        <div class="header-text">
-          <h1>Playground Scripts</h1>
-          <p>// roblox exploit library</p>
-        </div>
-      </div>
-      <div class="badge" id="badge">-- --</div>
-    </div>
-    <div class="search-wrap">
-      <span class="search-icon">&#8981;</span>
-      <input type="text" id="search" placeholder="Search scripts..." oninput="filterScripts()">
-    </div>
-    <div class="script-list" id="scriptList"></div>
-    <div class="footer">
-      <div class="status" id="status">&#10003; copied</div>
-      <div class="count" id="count"></div>
+
+```
+<div class="header">
+  <div class="header-left">
+    <div class="logo-bar"></div>
+    <div class="header-text">
+      <h1>Playground Scripts</h1>
+      <p>// roblox exploit library</p>
     </div>
   </div>
+  <div class="badge" id="badge">-- --</div>
+</div>
+
+<div class="search-wrap">
+  <span class="search-icon">&#8981;</span>
+  <input type="text" id="search" placeholder="Search scripts..." oninput="onFilter()">
+</div>
+
+<div class="tabs-wrap" id="tabsWrap"></div>
+
+<div class="script-list" id="scriptList"></div>
+
+<div class="footer">
+  <div class="count" id="count"></div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- Toast -->
+
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span class="toast-text">copied —</span>
+  <span class="toast-name" id="toastName"></span>
 </div>
 
 <script>
 var scripts = [
-["All Characters",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
-["Arcade Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
-["Blood Debt",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Blood%20debt"))()'],
-["Brookhaven",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Brookhaven"))()'],
-["Bug Test",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bug%20test"))()'],
-["Bypass Marvellous",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bypass-marvellous"))()'],
-["Carry People 3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Carry%20people%203"))()'],
-["Characters v1",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v1"))()'],
-["Characters v2",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v2"))()'],
-["Characters v3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v3"))()'],
-["Chicago Trenches",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chicago-Trenches"))()'],
-["Chose ur power",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chose%20ur%20power"))()'],
-["Draw a raft",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Draw-a-raft"))()'],
-["FPV DRONE",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/FPV%20DRONE"))()'],
-["Fall and break bones",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fall%20and%20break%20bones"))()'],
-["Fame",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fame"))()'],
-["Field Goal Simulator",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Field%20Goal%20simulator"))()'],
-["Fireball Training",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fireball-Training"))()'],
-["Flag Football",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Flag%20football"))()'],
-["Football Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Football%20duals"))()'],
-["Frisbee",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Frisbee"))()'],
-["Genic Ragdoll Blood",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Genic%20ragdoll%20blood"))()'],
-["Grab Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grab%20battles"))()'],
-["Grapple People",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grapple%20people"))()'],
-["High Bounce",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/High%20bounce"))()'],
-["Highway Showdown",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Highway-showdown"))()'],
-["Knockback Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Knockback%20battles"))()'],
-["Last Letter",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Last%20letter"))()'],
-["Leaf Collector",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Leaf%20Collector"))()'],
-["Marked",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Marked"))()'],
-["Mine a Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mine-a-brainrot"))()'],
-["Mvs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mvs"))()'],
-["NBA Champs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nba%20champs"))()'],
-["New Dawn",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/New%20Dawn"))()'],
-["Nose Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nose%20battles"))()'],
-["One Tap",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/One-tap"))()'],
-["Playground Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Playground%20basketball"))()'],
-["Point Sender",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Point-sender"))()'],
-["Poop",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Poop"))()'],
-["Quick Shot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Quck-shot"))()'],
-["Shopping Drift",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Shopping-drift-at-driftmart"))()'],
-["Slap Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Slap-duals"))()'],
-["Soccer Arena",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Soccer-arena"))()'],
-["Speed Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Speed-brainrot"))()'],
-["Sword Reach",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Sword%20reach"))()'],
-["Touch Soccer",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Touch%20soccer"))()'],
-["Violent",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
+  ["Marvellous Smackdown All", "characters", 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
+  ["Arcade Basketball",  "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
+  ["Blood Debt",         "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Blood%20debt"))()'],
+  ["Brookhaven",         "roleplay",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Brookhaven"))()'],
+  ["Bug Test",           "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bug%20test"))()'],
+  ["Bypass Marvellous",  "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Bypass-marvellous"))()'],
+  ["Carry People 3",     "roleplay",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Carry%20people%203"))()'],
+  ["Marvellous Smackdown v1", "characters", 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v1"))()'],
+  ["Marvellous Smackdown v2", "characters", 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v2"))()'],
+  ["Marvellous Smackdown v3", "characters", 'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v3"))()'],
+  ["Chicago Trenches",   "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chicago-Trenches"))()'],
+  ["Chose ur power",     "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chose%20ur%20power"))()'],
+  ["Draw a raft",        "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Draw-a-raft"))()'],
+  ["FPV DRONE",          "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/FPV%20DRONE"))()'],
+  ["Fall and break bones","combat",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fall%20and%20break%20bones"))()'],
+  ["Fame",               "roleplay",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fame"))()'],
+  ["Field Goal Simulator","sports",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Field%20Goal%20simulator"))()'],
+  ["Fireball Training",  "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fireball-Training"))()'],
+  ["Flag Football",      "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Flag%20football"))()'],
+  ["Football Duals",     "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Football%20duals"))()'],
+  ["Frisbee",            "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Frisbee"))()'],
+  ["Genic Ragdoll Blood","combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Genic%20ragdoll%20blood"))()'],
+  ["Grab Battles",       "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grab%20battles"))()'],
+  ["Grapple People",     "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grapple%20people"))()'],
+  ["High Bounce",        "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/High%20bounce"))()'],
+  ["Highway Showdown",   "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Highway-showdown"))()'],
+  ["Knockback Battles",  "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Knockback%20battles"))()'],
+  ["Last Letter",        "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Last%20letter"))()'],
+  ["Leaf Collector",     "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Leaf%20Collector"))()'],
+  ["Marked",             "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Marked"))()'],
+  ["Mine a Brainrot",    "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mine-a-brainrot"))()'],
+  ["Mvs",                "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mvs"))()'],
+  ["NBA Champs",         "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nba%20champs"))()'],
+  ["New Dawn",           "roleplay",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/New%20Dawn"))()'],
+  ["Nose Battles",       "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nose%20battles"))()'],
+  ["One Tap",            "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/One-tap"))()'],
+  ["Playground Basketball","sports",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Playground%20basketball"))()'],
+  ["Point Sender",       "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Point-sender"))()'],
+  ["Poop",               "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Poop"))()'],
+  ["Quick Shot",         "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Quck-shot"))()'],
+  ["Shopping Drift",     "roleplay",   'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Shopping-drift-at-driftmart"))()'],
+  ["Slap Duals",         "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Slap-duals"))()'],
+  ["Soccer Arena",       "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Soccer-arena"))()'],
+  ["Speed Brainrot",     "utility",    'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Speed-brainrot"))()'],
+  ["Sword Reach",        "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Sword%20reach"))()'],
+  ["Touch Soccer",       "sports",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Touch%20soccer"))()'],
+  ["Violent",            "combat",     'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
 ];
+
+var CATEGORIES = ["all", "combat", "sports", "characters", "roleplay", "utility"];
+var activeTab = "all";
+var filtered = [];
+var toastTimer, toastHide;
+
+/* ── BUILD TABS ── */
+var tabsWrap = document.getElementById('tabsWrap');
+CATEGORIES.forEach(function(cat) {
+  var btn = document.createElement('button');
+  btn.className = 'tab' + (cat === 'all' ? ' active' : '');
+  btn.textContent = cat;
+  btn.setAttribute('data-cat', cat);
+  tabsWrap.appendChild(btn);
+});
+
+tabsWrap.addEventListener('click', function(e) {
+  var btn = e.target;
+  if (!btn.classList.contains('tab')) return;
+  var cats = tabsWrap.querySelectorAll('.tab');
+  for (var i = 0; i < cats.length; i++) cats[i].classList.remove('active');
+  btn.classList.add('active');
+  activeTab = btn.getAttribute('data-cat');
+  render();
+});
 
 document.getElementById('badge').textContent = scripts.length + ' scripts';
 
-var timer;
-
-var filtered = [];
-
-function render(filter) {
-  filter = filter || '';
+/* ── RENDER ── */
+function render() {
+  var search = (document.getElementById('search').value || '').toLowerCase();
   var list = document.getElementById('scriptList');
-  filtered = scripts.filter(function(s){ return s[0].toLowerCase().indexOf(filter.toLowerCase()) !== -1; });
+
+  filtered = scripts.filter(function(s) {
+    var matchSearch = s[0].toLowerCase().indexOf(search) !== -1;
+    var matchCat = activeTab === 'all' || s[1] === activeTab;
+    return matchSearch && matchCat;
+  });
 
   if (!filtered.length) {
     list.innerHTML = '<div class="no-results">no scripts found</div>';
   } else {
-    list.innerHTML = filtered.map(function(s, i){
-      var delay = Math.min(i*10,160);
+    list.innerHTML = filtered.map(function(s, i) {
+      var delay = Math.min(i * 10, 160);
       return '<div class="script-row" style="-webkit-animation-delay:' + delay + 'ms;animation-delay:' + delay + 'ms">' +
-        '<span class="row-num">' + (i+1 < 10 ? '0' + (i+1) : i+1) + '</span>' +
+        '<span class="row-num">' + (i + 1 < 10 ? '0' + (i + 1) : i + 1) + '</span>' +
         '<span class="row-name">' + s[0] + '</span>' +
+        '<span class="row-tag">' + s[1] + '</span>' +
         '<button class="copy-btn" data-idx="' + i + '">copy</button>' +
       '</div>';
     }).join('');
   }
 
   document.getElementById('count').textContent =
-    filter ? filtered.length + ' / ' + scripts.length : scripts.length + ' total';
+    search || activeTab !== 'all'
+      ? filtered.length + ' / ' + scripts.length
+      : scripts.length + ' total';
 }
 
+/* ── COPY ── */
 function fallbackCopy(text) {
   var ta = document.createElement('textarea');
   ta.value = text;
@@ -464,18 +627,27 @@ function fallbackCopy(text) {
   document.body.removeChild(ta);
 }
 
-function doCopy(btn, text) {
+function showToast(name) {
+  var toast = document.getElementById('toast');
+  document.getElementById('toastName').textContent = name;
+  clearTimeout(toastTimer);
+  clearTimeout(toastHide);
+  toast.classList.remove('show');
+  toastTimer = setTimeout(function() {
+    toast.classList.add('show');
+    toastHide = setTimeout(function() { toast.classList.remove('show'); }, 2000);
+  }, 10);
+}
+
+function doCopy(btn, text, name) {
   function onSuccess() {
     btn.textContent = 'done';
     btn.classList.add('copied');
-    setTimeout(function(){ btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1400);
-    var st = document.getElementById('status');
-    st.classList.add('on');
-    clearTimeout(timer);
-    timer = setTimeout(function(){ st.classList.remove('on'); }, 1800);
+    setTimeout(function() { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1400);
+    showToast(name);
   }
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(text).then(onSuccess).catch(function(){ fallbackCopy(text); onSuccess(); });
+    navigator.clipboard.writeText(text).then(onSuccess).catch(function() { fallbackCopy(text); onSuccess(); });
   } else {
     fallbackCopy(text);
     onSuccess();
@@ -487,12 +659,12 @@ document.getElementById('scriptList').addEventListener('click', function(e) {
   if (btn.classList.contains('copy-btn')) {
     var idx = parseInt(btn.getAttribute('data-idx'), 10);
     if (!isNaN(idx) && filtered[idx]) {
-      doCopy(btn, filtered[idx][1]);
+      doCopy(btn, filtered[idx][2], filtered[idx][0]);
     }
   }
 });
 
-function filterScripts() { render(document.getElementById('search').value); }
+function onFilter() { render(); }
 
 render();
 </script>
