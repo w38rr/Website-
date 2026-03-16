@@ -1,203 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Playground Scripts</title>
-<!-- Optional: include a Google Font for better typography -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 <style>
-/* Reset and base styles */
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #0b1220, #1e293b);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding: 40px 20px;
-    transition: background 0.5s;
+*{
+    box-sizing:border-box;
 }
 
-/* Dark mode toggle button */
-#darkModeToggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #2563eb;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: background 0.3s;
-}
-#darkModeToggle:hover {
-    background: #1d4ed8;
+body{
+    margin:0;
+    font-family:system-ui,sans-serif;
+    background:radial-gradient(circle at top,#1e293b,#020617);
+    color:white;
+    display:flex;
+    justify-content:center;
+    padding:24px;
 }
 
-/* Container styles */
-.container {
-    width: 440px;
-    max-width: 90%;
-    background: rgba(15, 23, 42, 0.98);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    position: relative;
+.container{
+    width:430px;
+    background:rgba(15,23,42,.85);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.45);
 }
 
-/* Heading styles */
-h1 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #f0f0f0;
+h1{
+    text-align:center;
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:20px;
+    letter-spacing:.5px;
 }
 
-/* Search input with icon */
-.search-container {
-    position: relative;
-    margin-bottom: 20px;
-}
-#search {
-    width: 100%;
-    padding: 14px 16px 14px 40px;
-    border: none;
-    border-radius: 12px;
-    background: #222b45;
-    color: #fff;
-    font-size: 15px;
-    outline: none;
-    transition: background 0.3s, box-shadow 0.3s;
-}
-#search:focus {
-    background: #2a3a5c;
-    box-shadow: 0 0 8px #2563eb;
-}
-/* Search icon */
-.search-container::before {
-    content: "🔍";
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #aaa;
+.search-box{
+    position:sticky;
+    top:0;
+    background:rgba(15,23,42,.95);
+    padding-bottom:14px;
+    z-index:10;
 }
 
-/* Script list styles */
-.script-list {
-    max-height: 540px;
-    overflow-y: auto;
+input{
+    width:100%;
+    padding:13px 14px;
+    border:none;
+    border-radius:14px;
+    background:#111827;
+    color:white;
+    font-size:14px;
+    outline:none;
+    border:1px solid rgba(255,255,255,.06);
 }
 
-/* Script card styles with hover effects */
-.script-card {
-    background: #1f2937;
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.script-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+.script-list{
+    max-height:560px;
+    overflow-y:auto;
+    padding-right:4px;
 }
 
-/* Script name styles */
-.script-name {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #e0e0e0;
+.script-list::-webkit-scrollbar{
+    width:6px;
 }
 
-/* Button styles with icon */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: #3b82f6;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background-color 0.3s, transform 0.2s;
-}
-button:hover {
-    background-color: #2563eb;
-    transform: translateY(-2px);
+.script-list::-webkit-scrollbar-thumb{
+    background:#334155;
+    border-radius:20px;
 }
 
-/* Status message styles */
-.status {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #22c55e;
-    font-weight: 500;
-    height: 20px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.status.show {
-    opacity: 1;
+.script-card{
+    background:rgba(17,24,39,.9);
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:16px;
+    padding:14px;
+    margin-bottom:12px;
+    transition:.25s ease;
 }
 
-/* Toast notification styles */
-#toast {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #222b45;
-    padding: 12px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    color: #fff;
-    font-weight: 600;
-    opacity: 0;
-    transition: opacity 0.4s, transform 0.4s;
+.script-card:hover{
+    transform:translateY(-2px);
+    border-color:rgba(37,99,235,.4);
 }
-#toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(-10px);
+
+.script-name{
+    font-size:14px;
+    margin-bottom:10px;
+    color:#e5e7eb;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(90deg,#2563eb,#1d4ed8);
+    color:white;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    opacity:.92;
+}
+
+.status{
+    text-align:center;
+    margin-top:14px;
+    font-size:14px;
+    color:#22c55e;
 }
 </style>
 </head>
 <body>
 
-<!-- Dark mode toggle button -->
-<button id="darkModeToggle">Toggle Dark Mode</button>
-
 <div class="container">
-<h1>Playground Scripts</h1>
-<div class="search-container">
-    <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()" />
-</div>
-<div class="script-list" id="scriptList"></div>
-<div class="status" id="status"></div>
-</div>
+    <h1>Playground Scripts</h1>
 
-<!-- Toast notification -->
-<div id="toast"></div>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()">
+    </div>
+
+    <div class="script-list" id="scriptList"></div>
+
+    <div class="status" id="status"></div>
+</div>
 
 <script>
-// Script data
 const scripts = [
 ["All Characters",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
 ["Arcade Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
@@ -210,91 +143,31 @@ const scripts = [
 ["Characters v2",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v2"))()'],
 ["Characters v3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v3"))()'],
 ["Chicago Trenches",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chicago-Trenches"))()'],
-["Chose ur power",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chose%20ur%20power"))()'],
-["Draw a raft",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Draw-a-raft"))()'],
-["FPV DRONE",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/FPV%20DRONE"))()'],
-["Fall and break bones",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fall%20and%20break%20bones"))()'],
-["Fame",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fame"))()'],
-["Field Goal Simulator",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Field%20Goal%20simulator"))()'],
-["Fireball Training",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fireball-Training"))()'],
-["Flag Football",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Flag%20football"))()'],
-["Football Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Football%20duals"))()'],
-["Frisbee",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Frisbee"))()'],
-["Genic Ragdoll Blood",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Genic%20ragdoll%20blood"))()'],
-["Grab Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grab%20battles"))()'],
-["Grapple People",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grapple%20people"))()'],
-["High Bounce",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/High%20bounce"))()'],
-["Highway Showdown",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Highway-showdown"))()'],
-["Knockback Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Knockback%20battles"))()'],
-["Last Letter",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Last%20letter"))()'],
-["Leaf Collector",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Leaf%20Collector"))()'],
-["Marked",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Marked"))()'],
-["Mine a Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mine-a-brainrot"))()'],
-["Mvs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mvs"))()'],
-["NBA Champs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nba%20champs"))()'],
-["New Dawn",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/New%20Dawn"))()'],
-["Nose Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nose%20battles"))()'],
-["One Tap",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/One-tap"))()'],
-["Playground Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Playground%20basketball"))()'],
-["Point Sender",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Point-sender"))()'],
-["Poop",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Poop"))()'],
-["Quick Shot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Quck-shot"))()'],
-["Shopping Drift",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Shopping-drift-at-driftmart"))()'],
-["Slap Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Slap-duals"))()'],
-["Soccer Arena",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Soccer-arena"))()'],
-["Speed Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Speed-brainrot"))()'],
-["Sword Reach",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Sword%20reach"))()'],
-["Touch Soccer",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Touch%20soccer"))()'],
 ["Violent",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
 ];
 
-function renderScripts(filter="") {
-    const list = document.getElementById("scriptList");
-    list.innerHTML = "";
-    scripts
-        .filter(s => s[0].toLowerCase().includes(filter.toLowerCase()))
-        .forEach(script => {
-            list.innerHTML += `
+function renderScripts(filter=""){
+    const list=document.getElementById("scriptList");
+    list.innerHTML="";
+    scripts.filter(s=>s[0].toLowerCase().includes(filter.toLowerCase()))
+    .forEach(script=>{
+        list.innerHTML+=`
         <div class="script-card">
             <div class="script-name">${script[0]}</div>
             <button onclick='copyScript(${JSON.stringify(script[1])})'>Copy Script</button>
         </div>`;
-        });
+    });
 }
 
-function copyScript(script) {
+function copyScript(script){
     navigator.clipboard.writeText(script);
-    showToast("Script copied!");
+    document.getElementById("status").innerText="Copied";
 }
 
-function filterScripts() {
+function filterScripts(){
     renderScripts(document.getElementById("search").value);
 }
 
-// Dark mode toggle
-const toggleButton = document.getElementById("darkModeToggle");
-toggleButton.onclick = () => {
-    document.body.classList.toggle("dark-mode");
-    if (document.body.classList.contains("dark-mode")) {
-        document.body.style.background = "linear-gradient(135deg, #000000, #222)";
-        toggleButton.innerText = "Light Mode";
-    } else {
-        document.body.style.background = "linear-gradient(135deg, #0b1220, #1e293b)";
-        toggleButton.innerText = "Dark Mode";
-    }
-}
-
-// Toast notification function
-function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.classList.add("show");
-    setTimeout(() => {
-        toast.classList.remove("show");
-    }, 1500);
-}
-
-// Initial render
 renderScripts();
 </script>
 
