@@ -7,111 +7,93 @@
 <style>
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-    margin:0;
     font-family:system-ui,sans-serif;
-    background:radial-gradient(circle at top,#1e293b,#020617);
+    background:#020617;
     color:white;
     display:flex;
     justify-content:center;
-    padding:24px;
+    padding:16px;
 }
 
 .container{
-    width:430px;
-    background:rgba(15,23,42,.85);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:24px;
-    padding:24px;
-    box-shadow:0 20px 50px rgba(0,0,0,.45);
+    width:390px;
+    background:#0f172a;
+    border-radius:18px;
+    padding:16px;
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
 }
 
 h1{
     text-align:center;
-    font-size:24px;
+    font-size:20px;
+    margin-bottom:12px;
     font-weight:600;
-    margin-bottom:20px;
-    letter-spacing:.5px;
-}
-
-.search-box{
-    position:sticky;
-    top:0;
-    background:rgba(15,23,42,.95);
-    padding-bottom:14px;
-    z-index:10;
 }
 
 input{
     width:100%;
-    padding:13px 14px;
+    padding:10px;
     border:none;
-    border-radius:14px;
+    border-radius:10px;
     background:#111827;
     color:white;
-    font-size:14px;
+    font-size:13px;
+    margin-bottom:12px;
     outline:none;
-    border:1px solid rgba(255,255,255,.06);
 }
 
 .script-list{
-    max-height:560px;
+    max-height:520px;
     overflow-y:auto;
-    padding-right:4px;
 }
 
 .script-list::-webkit-scrollbar{
-    width:6px;
+    width:5px;
 }
 
 .script-list::-webkit-scrollbar-thumb{
     background:#334155;
-    border-radius:20px;
+    border-radius:10px;
 }
 
 .script-card{
-    background:rgba(17,24,39,.9);
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:16px;
-    padding:14px;
-    margin-bottom:12px;
-    transition:.25s ease;
-}
-
-.script-card:hover{
-    transform:translateY(-2px);
-    border-color:rgba(37,99,235,.4);
+    background:#111827;
+    border-radius:12px;
+    padding:10px;
+    margin-bottom:8px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .script-name{
-    font-size:14px;
-    margin-bottom:10px;
+    font-size:13px;
     color:#e5e7eb;
 }
 
 button{
-    width:100%;
-    padding:10px;
     border:none;
-    border-radius:12px;
-    background:linear-gradient(90deg,#2563eb,#1d4ed8);
+    background:#2563eb;
     color:white;
-    font-size:14px;
+    padding:7px 10px;
+    border-radius:8px;
+    font-size:12px;
     cursor:pointer;
-    transition:.2s;
 }
 
 button:hover{
-    opacity:.92;
+    background:#1d4ed8;
 }
 
 .status{
     text-align:center;
-    margin-top:14px;
-    font-size:14px;
+    margin-top:10px;
+    font-size:13px;
     color:#22c55e;
 }
 </style>
@@ -120,13 +102,8 @@ button:hover{
 
 <div class="container">
     <h1>Playground Scripts</h1>
-
-    <div class="search-box">
-        <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()">
-    </div>
-
+    <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()">
     <div class="script-list" id="scriptList"></div>
-
     <div class="status" id="status"></div>
 </div>
 
@@ -143,18 +120,54 @@ const scripts = [
 ["Characters v2",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v2"))()'],
 ["Characters v3",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Characters%20v3"))()'],
 ["Chicago Trenches",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chicago-Trenches"))()'],
+["Chose ur power",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Chose%20ur%20power"))()'],
+["Draw a raft",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Draw-a-raft"))()'],
+["FPV DRONE",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/FPV%20DRONE"))()'],
+["Fall and break bones",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fall%20and%20break%20bones"))()'],
+["Fame",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fame"))()'],
+["Field Goal Simulator",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Field%20Goal%20simulator"))()'],
+["Fireball Training",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Fireball-Training"))()'],
+["Flag Football",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Flag%20football"))()'],
+["Football Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Football%20duals"))()'],
+["Frisbee",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Frisbee"))()'],
+["Genic Ragdoll Blood",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Genic%20ragdoll%20blood"))()'],
+["Grab Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grab%20battles"))()'],
+["Grapple People",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Grapple%20people"))()'],
+["High Bounce",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/High%20bounce"))()'],
+["Highway Showdown",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Highway-showdown"))()'],
+["Knockback Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Knockback%20battles"))()'],
+["Last Letter",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Last%20letter"))()'],
+["Leaf Collector",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Leaf%20Collector"))()'],
+["Marked",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Marked"))()'],
+["Mine a Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mine-a-brainrot"))()'],
+["Mvs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Mvs"))()'],
+["NBA Champs",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nba%20champs"))()'],
+["New Dawn",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/New%20Dawn"))()'],
+["Nose Battles",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Nose%20battles"))()'],
+["One Tap",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/One-tap"))()'],
+["Playground Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Playground%20basketball"))()'],
+["Point Sender",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Point-sender"))()'],
+["Poop",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Poop"))()'],
+["Quick Shot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Quck-shot"))()'],
+["Shopping Drift",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Shopping-drift-at-driftmart"))()'],
+["Slap Duals",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Slap-duals"))()'],
+["Soccer Arena",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Soccer-arena"))()'],
+["Speed Brainrot",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Speed-brainrot"))()'],
+["Sword Reach",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Sword%20reach"))()'],
+["Touch Soccer",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Touch%20soccer"))()'],
 ["Violent",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
 ];
 
 function renderScripts(filter=""){
     const list=document.getElementById("scriptList");
     list.innerHTML="";
-    scripts.filter(s=>s[0].toLowerCase().includes(filter.toLowerCase()))
+    scripts
+    .filter(s=>s[0].toLowerCase().includes(filter.toLowerCase()))
     .forEach(script=>{
-        list.innerHTML+=`
+        list.innerHTML += `
         <div class="script-card">
             <div class="script-name">${script[0]}</div>
-            <button onclick='copyScript(${JSON.stringify(script[1])})'>Copy Script</button>
+            <button onclick='copyScript(${JSON.stringify(script[1])})'>Copy</button>
         </div>`;
     });
 }
