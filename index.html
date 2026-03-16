@@ -1,92 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Playground Scripts</title>
+<!-- Optional: include a Google Font for better typography -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 <style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#0b1220,#1e293b);
-    color:white;
-    display:flex;
-    justify-content:center;
-    padding:20px;
+/* Reset and base styles */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0b1220, #1e293b);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    transition: background 0.5s;
 }
-.container{
-    width:420px;
-    background:rgba(15,23,42,.97);
-    border-radius:20px;
-    padding:24px;
-    box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+/* Dark mode toggle button */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #2563eb;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s;
 }
-h1{
-    text-align:center;
-    font-size:24px;
-    margin-bottom:18px;
-    font-weight:600;
+#darkModeToggle:hover {
+    background: #1d4ed8;
 }
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:12px;
-    background:#111827;
-    color:white;
-    margin-bottom:16px;
-    font-size:14px;
-    outline:none;
+
+/* Container styles */
+.container {
+    width: 440px;
+    max-width: 90%;
+    background: rgba(15, 23, 42, 0.98);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    position: relative;
 }
-.script-list{
-    max-height:540px;
-    overflow-y:auto;
+
+/* Heading styles */
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #f0f0f0;
 }
-.script-card{
-    background:#111827;
-    border-radius:14px;
-    padding:14px;
-    margin-bottom:10px;
-    transition:.2s;
+
+/* Search input with icon */
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
 }
-.script-card:hover{
-    transform:translateY(-2px);
+#search {
+    width: 100%;
+    padding: 14px 16px 14px 40px;
+    border: none;
+    border-radius: 12px;
+    background: #222b45;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: background 0.3s, box-shadow 0.3s;
 }
-.script-name{
-    margin-bottom:10px;
-    font-size:14px;
+#search:focus {
+    background: #2a3a5c;
+    box-shadow: 0 0 8px #2563eb;
 }
-button{
-    width:100%;
-    padding:10px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
-    font-size:14px;
+/* Search icon */
+.search-container::before {
+    content: "🔍";
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaa;
 }
-button:hover{
-    background:#1d4ed8;
+
+/* Script list styles */
+.script-list {
+    max-height: 540px;
+    overflow-y: auto;
 }
-.status{
-    text-align:center;
-    margin-top:14px;
-    color:#22c55e;
-    font-size:14px;
+
+/* Script card styles with hover effects */
+.script-card {
+    background: #1f2937;
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.script-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+}
+
+/* Script name styles */
+.script-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+/* Button styles with icon */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3b82f6;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+/* Status message styles */
+.status {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #22c55e;
+    font-weight: 500;
+    height: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.status.show {
+    opacity: 1;
+}
+
+/* Toast notification styles */
+#toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222b45;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    color: #fff;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+}
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
 }
 </style>
 </head>
 <body>
 
+<!-- Dark mode toggle button -->
+<button id="darkModeToggle">Toggle Dark Mode</button>
+
 <div class="container">
 <h1>Playground Scripts</h1>
-<input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()">
+<div class="search-container">
+    <input type="text" id="search" placeholder="Search scripts..." onkeyup="filterScripts()" />
+</div>
 <div class="script-list" id="scriptList"></div>
 <div class="status" id="status"></div>
 </div>
 
+<!-- Toast notification -->
+<div id="toast"></div>
+
 <script>
+// Script data
 const scripts = [
 ["All Characters",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/All%20characters"))()'],
 ["Arcade Basketball",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Arcade%20basketball"))()'],
@@ -137,28 +248,53 @@ const scripts = [
 ["Violent",'loadstring(game:HttpGet("https://raw.githubusercontent.com/w38rr/w38r/main/Violent"))()']
 ];
 
-function renderScripts(filter=""){
-    const list=document.getElementById("scriptList");
-    list.innerHTML="";
-    scripts.filter(s=>s[0].toLowerCase().includes(filter.toLowerCase()))
-    .forEach(script=>{
-        list.innerHTML += `
+function renderScripts(filter="") {
+    const list = document.getElementById("scriptList");
+    list.innerHTML = "";
+    scripts
+        .filter(s => s[0].toLowerCase().includes(filter.toLowerCase()))
+        .forEach(script => {
+            list.innerHTML += `
         <div class="script-card">
             <div class="script-name">${script[0]}</div>
             <button onclick='copyScript(${JSON.stringify(script[1])})'>Copy Script</button>
         </div>`;
-    });
+        });
 }
 
-function copyScript(script){
+function copyScript(script) {
     navigator.clipboard.writeText(script);
-    document.getElementById("status").innerText="Copied";
+    showToast("Script copied!");
 }
 
-function filterScripts(){
+function filterScripts() {
     renderScripts(document.getElementById("search").value);
 }
 
+// Dark mode toggle
+const toggleButton = document.getElementById("darkModeToggle");
+toggleButton.onclick = () => {
+    document.body.classList.toggle("dark-mode");
+    if (document.body.classList.contains("dark-mode")) {
+        document.body.style.background = "linear-gradient(135deg, #000000, #222)";
+        toggleButton.innerText = "Light Mode";
+    } else {
+        document.body.style.background = "linear-gradient(135deg, #0b1220, #1e293b)";
+        toggleButton.innerText = "Dark Mode";
+    }
+}
+
+// Toast notification function
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
+}
+
+// Initial render
 renderScripts();
 </script>
 
